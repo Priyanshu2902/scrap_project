@@ -1,8 +1,22 @@
+from bs4 import BeautifulSoup
 import requests
 
 url = "https://example.com"
-
 response = requests.get(url)
 
-print("Status Code:", response.status_code)
-print("First 200 chars:\n", response.text[:200])
+soup = BeautifulSoup(response.text, "html.parser")
+
+links = soup.find_all("a")
+
+data = []
+
+for link in links:
+    text = link.text.strip()
+    href = link.get("href")  # safer than link["href"]
+
+    data.append({
+        "text": text,
+        "href": href
+    })
+
+print(data)
