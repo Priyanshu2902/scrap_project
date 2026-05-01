@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Book Data Scraper</title>
+
+    <style>
+
+        body {
+            font-family: Arial;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        input, select, button {
+            padding: 10px;
+            margin-right: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #333;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <h1>Book Data Scraper</h1>
+
+    <form method="GET">
+
+        <input
+            type="text"
+            name="search"
+            placeholder="Search book title..."
+            value="{{ search if search else '' }}"
+        >
+
+        <select name="rating">
+
+            <option value="">All Ratings</option>
+
+            <option value="One">One</option>
+            <option value="Two">Two</option>
+            <option value="Three">Three</option>
+            <option value="Four">Four</option>
+            <option value="Five">Five</option>
+
+        </select>
+
+        <button type="submit">Filter</button>
+
+    </form>
+
+    <table>
+
+        <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Rating</th>
+        </tr>
+
+        {% for book in books %}
+
+        <tr>
+            <td>{{ book[0] }}</td>
+            <td>{{ book[1] }}</td>
+            <td>{{ book[2] }}</td>
+        </tr>
+
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
